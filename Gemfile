@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem 'sinatra'
+gem 'capybara'
 gem 'data_mapper'
 gem 'database_cleaner'
 gem 'dm-postgres-adapter'

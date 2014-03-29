@@ -17,9 +17,9 @@ get '/' do
 end
 
 post '/links' do
-	url 	= params["url"]
+	url		= params["url"]
 	title = params["title"]
-	tags 	= params["tags"].split(' ').map{ |tag| Tag.first_or_create(:text => tag)}
+	tags	= params["tags"].split(' ').map{ |tag| Tag.first_or_create(:text => tag)}
 	Link.create(:url 	 => url, 
 							:title => title, 
 							:tags  => tags)
@@ -39,14 +39,14 @@ end
 
 post '/users' do
 	@user = User.new(:email 	 => params[:email],
-									 :password => params[:password],
-									 :password_confirmation => params[:password_confirmation])
+									:password => params[:password],
+									:password_confirmation => params[:password_confirmation])
 	if @user.save
-	 	 session[:user_id] = @user.id
-	   redirect to('/')
+		session[:user_id] = @user.id
+	  redirect to('/')
 	else
-		 flash[:notice] = "Sorry, your passwords don't match"
-	   erb :"users/new"
+		flash.now[:errors] = @user.errors.full_messages
+	  erb :"users/new"
 	end
 
 end

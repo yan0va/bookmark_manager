@@ -17,10 +17,10 @@ get '/' do
 end
 
 post '/links' do
-	url		= params["url"]
+	url	= params["url"]
 	title = params["title"]
-	tags	= params["tags"].split(' ').map{ |tag| Tag.first_or_create(:text => tag)}
-	Link.create(:url 	 => url, 
+	tags = params["tags"].split(' ').map{ |tag| Tag.first_or_create(:text => tag)}
+	Link.create(:url => url, 
 							:title => title, 
 							:tags  => tags)
 	redirect to('/')
@@ -38,7 +38,7 @@ get '/users/new' do
 end
 
 post '/users' do
-	@user = User.new(:email 	 => params[:email],
+	@user = User.new(:email => params[:email],
 									:password => params[:password],
 									:password_confirmation => params[:password_confirmation])
 	if @user.save
